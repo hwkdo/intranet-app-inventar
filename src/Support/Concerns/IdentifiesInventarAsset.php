@@ -27,7 +27,10 @@ trait IdentifiesInventarAsset
     public array $inventar = [
         'beschreibung' => null,
         'barcode' => null,
+        'datev_nr' => null,
         'sn' => null,
+        'lieferdatum' => null,
+        'preis' => null,
         'raum_ist_id' => null,
         'raum_ist_text' => null,
     ];
@@ -117,7 +120,10 @@ trait IdentifiesInventarAsset
         return [
             'beschreibung' => null,
             'barcode' => null,
+            'datev_nr' => null,
             'sn' => null,
+            'lieferdatum' => null,
+            'preis' => null,
             'raum_ist_id' => null,
             'raum_ist_text' => null,
         ];

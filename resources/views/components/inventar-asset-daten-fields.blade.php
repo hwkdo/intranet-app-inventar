@@ -12,6 +12,12 @@
         <flux:input wire:model="inventar.beschreibung" label="Beschreibung" readonly />
         <flux:input wire:model="inventar.sn" label="Seriennummer" readonly />
         <flux:input label="{{ $raumLabel }}" value="{{ $this->inventarRaumIstLabel ?? '—' }}" readonly />
+        @if(filled($this->inventar['lieferdatum'] ?? null))
+            <flux:input wire:model="inventar.lieferdatum" label="Lieferdatum" readonly />
+        @endif
+        @if(filled($this->inventar['preis'] ?? null))
+            <flux:input wire:model="inventar.preis" label="Historischer Anschaffungspreis" description="Euro" readonly />
+        @endif
     @else
         <flux:input wire:model="inventar.beschreibung" label="Beschreibung" required />
         <flux:input wire:model="inventar.sn" label="Seriennummer" />

@@ -12,4 +12,12 @@
 @if(!empty($meldung->inventar['datev_nr']))
 **Datev-ID:** {{ $meldung->inventar['datev_nr'] }}
 @endif
+
+@if(!empty($meldung->inventar['lieferdatum']))
+**Lieferdatum:** {{ $meldung->inventar['lieferdatum'] }}
+@endif
+
+@if(filled($meldung->inventar['preis'] ?? null))
+**Historischer Anschaffungspreis:** {{ $meldung->inventar['preis'] }} Euro
+@endif
 @endcomponent
