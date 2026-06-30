@@ -17,6 +17,7 @@ return [
             'permissions' => [
                 'see-app-inventar',
             ],
+            'all_users' => true,
         ],
     ],
 ];
