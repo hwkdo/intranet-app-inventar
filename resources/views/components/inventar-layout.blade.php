@@ -8,9 +8,7 @@
     $defaultNavItems = [
         ['label' => 'Übersicht', 'href' => route('apps.inventar.index'), 'icon' => 'home', 'description' => 'Startseite der Inventar-App', 'buttonText' => 'Übersicht anzeigen'],
         ['label' => 'Anlagenabgang', 'href' => route('apps.inventar.aussonderung'), 'icon' => 'archive-box', 'description' => 'Schaden, Verlust, Verkauf oder Entsorgung melden', 'buttonText' => 'Anlagenabgang öffnen'],
-        ['label' => 'Standortwechsel', 'href' => route('apps.inventar.standortwechsel'), 'icon' => 'arrow-right-circle', 'description' => 'Dauerhaften Raumwechsel melden und in Itexia umsetzen', 'buttonText' => 'Standortwechsel öffnen'],
-        ['label' => 'Meine Einstellungen', 'href' => route('apps.inventar.settings.user'), 'icon' => 'cog-6-tooth', 'description' => 'Persönliche Einstellungen', 'buttonText' => 'Einstellungen öffnen', 'welcomeSection' => 'settings'],
-        ['label' => 'App-Info', 'href' => route('apps.inventar.info'), 'icon' => 'information-circle', 'description' => 'Version und Release-Historie', 'buttonText' => 'App-Info anzeigen', 'welcomeSection' => 'settings'],
+        ['label' => 'Standortwechsel', 'href' => route('apps.inventar.standortwechsel'), 'icon' => 'arrow-right-circle', 'description' => 'Dauerhaften Raumwechsel melden und in Itexia umsetzen', 'buttonText' => 'Standortwechsel öffnen'],        ['label' => 'App-Info', 'href' => route('apps.inventar.info'), 'icon' => 'information-circle', 'description' => 'Version und Release-Historie', 'buttonText' => 'App-Info anzeigen', 'welcomeSection' => 'settings'],
         ['label' => 'Admin', 'href' => route('apps.inventar.admin.index'), 'icon' => 'shield-check', 'description' => 'Einstellungen und Meldungen verwalten', 'buttonText' => 'Admin öffnen', 'permission' => 'manage-app-inventar', 'welcomeSection' => 'settings'],
     ];
 
