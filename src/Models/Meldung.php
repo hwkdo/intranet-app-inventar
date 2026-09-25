@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace Hwkdo\IntranetAppInventar\Models;
 
+use Hwkdo\IntranetAppInventar\Data\AppSettings;
 use Hwkdo\IntranetAppInventar\Enums\MeldungTyp;
 use Hwkdo\IntranetAppInventar\Enums\SeventhingsSyncStatus;
 use Illuminate\Database\Eloquent\Model;
@@ -37,9 +38,12 @@ class Meldung extends Model
     public function getGrundLabel(string $value): string
     {
         $labels = IntranetAppInventarSettings::current()?->settings->fieldLabels ?? [];
-        $gruende = $labels['gruende'] ?? [];
+        $gruende = array_merge(
+            AppSettings::DEFAULT_FIELD_LABELS['gruende'],
+            is_array($labels['gruende'] ?? null) ? $labels['gruende'] : [],
+        );
 
-        if (is_array($gruende) && isset($gruende[$value])) {
+        if (isset($gruende[$value])) {
             return (string) $gruende[$value];
         }
 
@@ -48,7 +52,10 @@ class Meldung extends Model
 
     public function getLabel(string $key): string
     {
-        $labels = IntranetAppInventarSettings::current()?->settings->fieldLabels ?? [];
+        $labels = array_merge(
+            AppSettings::DEFAULT_FIELD_LABELS,
+            IntranetAppInventarSettings::current()?->settings->fieldLabels ?? [],
+        );
 
         if ($key === 'grund1') {
             return (string) ($labels['grund1'] ?? 'Grund');
@@ -56,10 +63,6 @@ class Meldung extends Model
 
         if (isset($labels[$key]) && is_string($labels[$key])) {
             return $labels[$key];
-        }
-
-        if ($key === 'grund1' && isset($labels['gruende']) && is_array($labels['gruende'])) {
-            return (string) ($labels['gruende'][$this->data['grund1'] ?? ''] ?? ucfirst($key));
         }
 
         return ucfirst(str_replace('_', ' ', $key));

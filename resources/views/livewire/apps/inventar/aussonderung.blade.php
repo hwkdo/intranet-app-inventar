@@ -75,7 +75,15 @@ new #[Title('Inventar - Anlagenabgang')] class extends Component
         }
 
         if ($this->art_abgang === 'Verschrottung / Entsorgung') {
-            $rules['grund1'] = ['required', 'string'];
+            $rules['grund1'] = [
+                'required',
+                'in:grund_ist_bedienerfehler_mitarbeiter_hwk,grund_ist_bedienerfehler_dritte,grund_ist_unachtsamkeit_mitarbeiter_hwk,grund_ist_aeussere_einfluesse,grund_ist_abnutzung,grund_ist_ueberalterung,grund_ist_anderer_grund',
+            ];
+            $rules['grund2_alter_des_gegenstands'] = ['required', 'numeric', 'min:0', 'max:200'];
+
+            if ($this->grund1 === 'grund_ist_anderer_grund') {
+                $rules['grund2_anderer_grund'] = ['required', 'string', 'max:500'];
+            }
         }
 
         $this->validate($rules);
@@ -190,7 +198,8 @@ new #[Title('Inventar - Anlagenabgang')] class extends Component
                                 <flux:select.option value="grund_ist_bedienerfehler_dritte">Schaden - Bedienerfehler Dritte</flux:select.option>
                                 <flux:select.option value="grund_ist_unachtsamkeit_mitarbeiter_hwk">Schaden - Unachtsamkeit Mitarbeiter HWK</flux:select.option>
                                 <flux:select.option value="grund_ist_aeussere_einfluesse">Schaden - Äußere Einflüsse</flux:select.option>
-                                <flux:select.option value="grund_ist_abnutzung">Abnutzung</flux:select.option>
+                                <flux:select.option value="grund_ist_abnutzung">Totalverschleiß-/abnutzung</flux:select.option>
+                                <flux:select.option value="grund_ist_ueberalterung">Überalterung</flux:select.option>
                                 <flux:select.option value="grund_ist_anderer_grund">Anderer Grund</flux:select.option>
                             </flux:select>
                             @if(in_array($this->grund1, ['grund_ist_bedienerfehler_dritte', 'grund_ist_unachtsamkeit_dritte'], true))
@@ -199,11 +208,13 @@ new #[Title('Inventar - Anlagenabgang')] class extends Component
                                     <flux:input wire:model="grund2_schaden_kurs_ausbilder" label="Ausbilder" />
                                 </div>
                             @endif
-                            @if($this->grund1 === 'grund_ist_abnutzung')
-                                <flux:input wire:model="grund2_alter_des_gegenstands" label="Alter des Gegenstands (Jahre)" class="mt-4" />
-                            @endif
+                            <div class="mt-4">
+                                <flux:input wire:model="grund2_alter_des_gegenstands" label="(geschätztes) Alter in Jahren" type="number" min="0" max="200" step="1" required />
+                            </div>
                             @if($this->grund1 === 'grund_ist_anderer_grund')
-                                <flux:input wire:model="grund2_anderer_grund" label="Beschreibung" class="mt-4" />
+                                <div class="mt-4">
+                                    <flux:input wire:model="grund2_anderer_grund" label="Beschreibung" />
+                                </div>
                             @endif
                         </div>
                     @endif
