@@ -6,6 +6,7 @@ namespace Hwkdo\IntranetAppInventar\Services;
 
 use Hwkdo\SeventhingsLaravel\Models\Asset as ItexiaAsset;
 use Hwkdo\SeventhingsLaravel\SeventhingsLaravel;
+use Hwkdo\SeventhingsLaravel\Support\ItexiaRoomReferenceId;
 use Throwable;
 
 class ItexiaAssetLookupService
@@ -45,13 +46,9 @@ class ItexiaAssetLookupService
      */
     private function mapAsset(ItexiaAsset $asset, string $barcode): array
     {
-        $raumIst = $asset->raum_ist ?? null;
-        $raumIstId = null;
-        if (is_object($raumIst) && isset($raumIst->id)) {
-            $raumIstId = (int) $raumIst->id;
-        } elseif (is_numeric($raumIst)) {
-            $raumIstId = (int) $raumIst;
-        }
+        // Kein $asset->raum_ist: der Accessor ruft findRaumById() auf und kann bei
+        // unvollständigen Room-API-Antworten (fehlendes id) crashen. Nur Rohwert nutzen.
+        $raumIstId = ItexiaRoomReferenceId::fromApiValue($asset->getRawData('actual_room'));
 
         return [
             'barcode' => $barcode,
