@@ -1,5 +1,6 @@
 <?php
 
+use Livewire\Volt\Volt;
 use Illuminate\Support\Facades\Route;
 
 
@@ -18,3 +19,9 @@ Route::middleware(['web', 'auth', 'can:manage-app-inventar'])->group(function ()
 
     Route::redirect('apps/inventar/admin/meldungen', '/apps/inventar/admin?tab=meldungen')->name('apps.inventar.admin.meldungen');
 });
+
+Route::middleware(['web', 'auth', 'can:manage-app-inventar'])->group(function (): void {
+    Volt::route('apps/inventar/admin/background-activities', 'apps.inventar.admin.background-activities')
+        ->name('apps.inventar.admin.background-activities');
+});
+

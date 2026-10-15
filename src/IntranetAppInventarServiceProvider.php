@@ -4,8 +4,8 @@ declare(strict_types=1);
 
 namespace Hwkdo\IntranetAppInventar;
 
-use Hwkdo\IntranetAppInventar\Commands\IntranetAppInventarCommand;
 use Livewire\Livewire;
+use Livewire\Volt\Volt;
 use Spatie\LaravelPackageTools\Package;
 use Spatie\LaravelPackageTools\PackageServiceProvider;
 
@@ -28,6 +28,10 @@ class IntranetAppInventarServiceProvider extends PackageServiceProvider
     public function boot(): void
     {
         parent::boot();
+
+        $this->app->booted(function (): void {
+            Volt::mount(__DIR__.'/../resources/views/livewire');
+        });
 
         Livewire::addNamespace(
             namespace: 'intranet-app-inventar',

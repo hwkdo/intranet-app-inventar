@@ -1,10 +1,12 @@
 <?php
 
 namespace Hwkdo\IntranetAppInventar;
+use Hwkdo\IntranetAppBase\Interfaces\ProvidesBackgroundActivitiesInterface;
+use Hwkdo\IntranetAppInventar\Background\InventarBackgroundActivities;
 use Hwkdo\IntranetAppBase\Interfaces\IntranetAppInterface;
 use Illuminate\Support\Collection;
 
-class IntranetAppInventar implements IntranetAppInterface 
+class IntranetAppInventar implements IntranetAppInterface, ProvidesBackgroundActivitiesInterface 
 {
     public static function app_name(): string
     {
@@ -45,4 +47,11 @@ class IntranetAppInventar implements IntranetAppInterface
     {
         return [];
     }
+
+    public static function backgroundActivities(): array
+    {
+        return InventarBackgroundActivities::definitions();
+    }
+
+
 }

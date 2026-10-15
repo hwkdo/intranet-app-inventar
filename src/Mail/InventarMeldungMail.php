@@ -7,12 +7,13 @@ namespace Hwkdo\IntranetAppInventar\Mail;
 use Hwkdo\IntranetAppInventar\Data\SeventhingsSyncSummaryLine;
 use Hwkdo\IntranetAppInventar\Models\Meldung;
 use Illuminate\Bus\Queueable;
+use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Mail\Mailable;
 use Illuminate\Mail\Mailables\Content;
 use Illuminate\Mail\Mailables\Envelope;
 use Illuminate\Queue\SerializesModels;
 
-class InventarMeldungMail extends Mailable
+class InventarMeldungMail extends Mailable implements ShouldQueue
 {
     use Queueable, SerializesModels;
 
