@@ -1,8 +1,6 @@
 <?php
 
-use Livewire\Volt\Volt;
 use Illuminate\Support\Facades\Route;
-
 
 Route::middleware(['web', 'auth', 'can:see-app-inventar'])->group(function (): void {
     Route::livewire('apps/inventar', 'intranet-app-inventar::apps.inventar.index')->name('apps.inventar.index');
@@ -13,15 +11,8 @@ Route::middleware(['web', 'auth', 'can:see-app-inventar'])->group(function (): v
     Route::livewire('apps/inventar/info', 'intranet-app-inventar::apps.inventar.info')->name('apps.inventar.info');
 });
 
-
 Route::middleware(['web', 'auth', 'can:manage-app-inventar'])->group(function (): void {
     Route::livewire('apps/inventar/admin', 'intranet-app-inventar::apps.inventar.admin.index')->name('apps.inventar.admin.index');
 
     Route::redirect('apps/inventar/admin/meldungen', '/apps/inventar/admin?tab=meldungen')->name('apps.inventar.admin.meldungen');
 });
-
-Route::middleware(['web', 'auth', 'can:manage-app-inventar'])->group(function (): void {
-    Volt::route('apps/inventar/admin/background-activities', 'apps.inventar.admin.background-activities')
-        ->name('apps.inventar.admin.background-activities');
-});
-
